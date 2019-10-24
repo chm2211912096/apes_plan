@@ -23,13 +23,19 @@ class App extends Component {
 			'pages/index/index'
 		],
 		window: {
-			backgroundTextStyle: 'light',
+			backgroundTextStyle: 'dark',
 			navigationBarBackgroundColor: '#fff',
 			navigationBarTitleText: 'WeChat',
-			navigationBarTextStyle: 'black',
-			navigationStyle: 'custom'
+			navigationBarTextStyle: 'white',
+			navigationStyle: 'custom',
+			backgroundColor: '#d5d5d5',
 		},
-		cloud: true
+		cloud: true,
+		permission: {
+			"scope.userLocation": {
+				desc: "我们需要您授权您的位置信息"
+			}
+		}
 	};
 	
 	componentDidMount () {
@@ -39,8 +45,8 @@ class App extends Component {
 	}
 	
 	componentDidShow () {
-		Taro.getSystemInfo().then(({statusBarHeight}) => {
-			SetVariable('statusBarHeight', statusBarHeight);
+		Taro.getSystemInfo().then((res) => {
+			SetVariable('systemInfo', res);
 		})
 	}
 	

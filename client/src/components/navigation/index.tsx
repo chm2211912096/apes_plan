@@ -1,11 +1,10 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text } from "@tarojs/components";
 import './index.less';
-import '../../assets/icon/iconfont.css';
 import {get as GetVariable} from '../../runtime/variable';
 
 interface NavigationOption {
-	title: string,
+	title?: string,
 	showPrev?: boolean,
 }
 
@@ -14,19 +13,26 @@ export default class Navigation extends Component<NavigationOption> {
 		super(props);
 	}
 	render() {
-		const height = GetVariable("statusBarHeight");
-		const {title, showPrev} = this.props;
+		const {height = 0} = GetVariable("systemInfo");
+		const {title, showPrev = true} = this.props;
 		
 		return (
-			<View className="navigation d-flex align-items-center">
+			<View className="navigation">
 				<View className="status-bar" style={{height: height * 2 + 'rpx'}} />
-				<View className="navigate-bar d-flex align-items-center">
+				<View className="navigate-bar position-relative d-flex align-items-center justify-content-center">
 					{
 						showPrev ? (
-							<Text className="iconfont iconzuo icon-prev" />
+							<View className="navigation-menu-cover d-flex align-items-center position-absolute">
+								<Text
+									className="iconfont d-flex align-items-center justify-content-center icon-zuo icon-prev flex-grow-1 flex-shrink-1"
+								/>
+								<Text
+									className="flex-grow-1 flex-shrink-1 d-flex align-items-center justify-content-center iconfont icon-home"
+								/>
+							</View>
 						) : null
 					}
-					<Text>{ title }</Text>
+					<Text className="navigation-title">{ title }</Text>
 				</View>
 			</View>
 		)

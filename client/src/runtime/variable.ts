@@ -1,7 +1,7 @@
 import {ObjectType} from "./types";
 
 const Variable: ObjectType = {
-	statusBarHeight: 0
+	systemInfo: {}
 };
 
 export const get = function (key: string): any {
