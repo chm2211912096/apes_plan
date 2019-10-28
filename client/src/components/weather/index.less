@@ -1,6 +1,108 @@
 @import "../../app.less";
-.weather {
-    .location {
 
+@sunny: linear-gradient(to bottom, rgba(242, 167, 114, 1), rgba(251, 232, 159, 1), rgba(247, 209, 108, 1));
+@cloudy: linear-gradient(to bottom, rgba(185, 190, 194, 1), rgba(215, 213, 202, 1), rgba(89, 97, 121, 1));
+@rainy: linear-gradient(to bottom, rgba(119, 135, 189, 1), rgba(92, 103, 171, 1), rgba(15, 23, 77, 1));
+@snowy: linear-gradient(to bottom, rgba(140, 137, 245, 1), rgba(175, 199, 250, 1), rgba(141, 219, 251, 1));
+@night: linear-gradient(to bottom, rgba(95, 66, 131, 1), rgba(81, 89, 174, 1), rgba(21, 29, 65, 1));
+
+.weather.cloudy {
+    background: @cloudy;
+}
+.weather.rainy {
+    background: @rainy;
+}
+.weather.snowy {
+    background: @snowy;
+}
+.weather.sunny {
+    background: @sunny;
+}
+.weather.night {
+    background: @night;
+}
+
+.weather {
+    height: 100%;
+    color: #fff;
+
+    .weather-bg {
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+    }
+
+    .content {
+        z-index: 2;
+        color: #fff;
+        padding: 20px 30px;
+        height: 250px;
+
+        .time {
+            font-size: 80px;
+            letter-spacing: 4px;
+            line-height: 80px;
+
+            .colon {
+                opacity: 1;
+                animation: Time 1s ease .5s infinite;
+            }
+
+            .period {
+                font-size: 24px;
+                margin-left: 8px;
+                line-height: 48px;
+            }
+        }
+
+        .date {
+            font-size: 28px;
+
+            .month {
+                margin-left: 10px;
+            }
+        }
+
+        .weather-cover {
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 50px;
+            font-size: 24px;
+
+            .weather-content {
+                height: 100%;
+                width: 100%;
+                padding: 0 20px;
+
+                .province, .temp {
+                    margin-right: 10px;
+                }
+
+                .iconfont {
+                    font-size: 24px;
+                }
+            }
+        }
+    }
+}
+
+@keyframes Time {
+    0% {
+        opacity: 1;
+    }
+    40% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    90% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }

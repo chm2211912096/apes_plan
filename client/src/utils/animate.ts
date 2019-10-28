@@ -25,7 +25,7 @@ const default_option: AnimateOption = {
 
 export const createAnimate = function (option: AnimateOption = default_option) {
 	if(option.timingFunction && !timingFunctionList.includes(option.timingFunction)) {
-		throw new Error('timingFunction should be: ease | linear | ease-in | ease-in-out | ease-out | step-start | step-end');
+		throw new Error('timingFunction should one of: ease | linear | ease-in | ease-in-out | ease-out | step-start | step-end');
 	}
 	
 	return Taro.createAnimation(Object.assign({}, default_option, option));
