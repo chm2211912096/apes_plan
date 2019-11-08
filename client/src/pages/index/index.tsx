@@ -14,11 +14,14 @@ export default class Index extends Component {
 		translateAnimateData: [],
 		scaleAnimateData: [],
 		widthAnimateData: [],
+		menuCoverAnimateData: [],
+		showMenu: false
 	};
 	defaultTouch: TouchType = {
 		x: 0,
 		y: 0
 	};
+	menus: number[] = [1,2,3,4,5,6];
 	componentWillMount() {
 		this['translateAnimate'] = createAnimate();
 		this['scaleAnimate'] = createAnimate({
@@ -27,9 +30,9 @@ export default class Index extends Component {
 		this['widthAnimate'] = createAnimate({
 			transformOrigin: 'right'
 		});
-		this['menuAnimate'] = createAnimate({
-			transformOrigin: '0 0'
-		});
+		this['menuCoverAnimate'] = new Array(this.menus.length).fill('').map(() => createAnimate({
+			delay: 0
+		}));
 	}
 	hideUser() {
 		const {screenWidth = 0} = GetVariable('systemInfo');
@@ -80,10 +83,19 @@ export default class Index extends Component {
 		}
 	}
 	testShowMenu() {
-	
+		let {showMenu} = this.state;
+		let deg = showMenu ? 0 : 180 / (this.menus.length - 1);
+		let tx = showMenu ? 0 : -80;
+		for (let i = 0; i < this.menus.length; i++) {
+			this['menuCoverAnimate'][i].rotate(i * deg - 90).translateX(tx).step();
+		}
+		this.setState({
+			menuCoverAnimateData: this['menuCoverAnimate'].map(i => i.export()),
+			showMenu: !showMenu
+		})
 	}
 	render() {
-		let {translateAnimateData, scaleAnimateData, widthAnimateData} = this.state;
+		let {translateAnimateData, scaleAnimateData, widthAnimateData, menuCoverAnimateData, showMenu} = this.state;
 		
 		return (
 			<View
@@ -112,23 +124,34 @@ export default class Index extends Component {
 							showLocation
 							className="map"
 						/>
+						{
+							showMenu ? <View className="map-blur position-absolute" /> : null
+						}
 						<View className="map-mask-cover position-absolute">
 							<View className="map-mask position-relative">
-								<Text className="btn-fixed position-absolute">按钮</Text>
 								<View className="btn-animate position-absolute">
 									{
-										[1,2,3,4,5].map(i => {
+										this.menus.map(i => {
 											return (
-												<Text
-													className="btn position-absolute"
+												<View
+													className="btn-cover position-absolute"
+													animation={menuCoverAnimateData[i - 1]}
 													key={i}
-												>按钮{i}</Text>
+												>
+													<Text
+														className="btn"
+													>{i}</Text>
+												</View>
 											);
 										})
 									}
 								</View>
 							</View>
 						</View>
+						<Text
+							className="btn-fixed position-absolute"
+							onClick={this.testShowMenu.bind(this)}
+						>按钮</Text>
 					</View>
 				</View>
 			</View>

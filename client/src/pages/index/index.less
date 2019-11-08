@@ -1,3 +1,18 @@
+.circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    line-height: 80px;
+    text-align: center;
+    background: rgba(210, 180, 140, 1);
+    color: #fff;
+}
+
+.absolute {
+    right: 80px;
+    bottom: 200px;
+}
+
 .container {
     transform: translateX(-85vw);
 
@@ -15,34 +30,39 @@
                 height: 100%;
             }
 
-            .map-mask-cover {
+            .btn-fixed {
+                .circle;
+                .absolute;
+                border-radius: 50%;
+                z-index: 10;
+            }
+
+            .map-blur {
                 left: 0;
                 top: 0;
                 right: 0;
                 bottom: 0;
                 filter: blur(2px);
                 background: rgba(255, 255, 255, .6);
+                z-index: 2;
+            }
+
+            .map-mask-cover {
+                .absolute;
+                .circle;
+                z-index: 3;
 
                 .map-mask {
                     width: 100%;
                     height: 100%;
 
-                    .btn-fixed {
-                        right: 100px;
-                        bottom: 100px;
-                        background: red;
-                        width: 100px;
-                        height: 50px;
-                        z-index: 3;
-                    }
-
                     .btn-animate {
-                        right: 100px;
-                        bottom: 100px;
-                        width: 100px;
-                        height: 50px;
+                        left: 0;
+                        top: 0;
+                        .circle;
 
-                        .btn {
+                        .btn-cover {
+                            .circle;
                             left: 0;
                             top: 0;
                         }

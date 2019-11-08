@@ -16,5 +16,6 @@ export interface StateType {
 	translateAnimateData: Object[],
 	scaleAnimateData: Object[],
 	widthAnimateData: Object[],
-	menuAnimateData: Object[]
+	menuCoverAnimateData: Object[][],
+	showMenu: boolean
 }
